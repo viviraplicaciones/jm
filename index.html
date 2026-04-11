@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marian Crochet | HandMade</title>
+    <title>Remodelaciones JM | Tarjeta Digital</title>
     
     <link rel="icon" type="image/jpg" href="icono.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -16,7 +16,7 @@
         }
 
         :root {
-            --vinotinto: #630d31;
+            --azul-oscuro: #1a2a4b; 
             --whatsapp: #25d366;
             --texto: #1a2a4b;
             --glass: rgba(255, 255, 255, 0.92);
@@ -38,32 +38,66 @@
 
         /* --- HEADER --- */
         .header {
-            height: 360px; background: url('header.jpg') center/cover no-repeat;
-            position: relative; padding: 25px 20px; color: white; display: flex; flex-direction: column;
+            height: 360px; 
+            background: url('header.jpg') center/cover no-repeat;
+            position: relative; 
+            padding: 25px 20px; 
+            color: white; 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; /* Centra el contenido horizontalmente */
+            text-align: center;
         }
 
+        /* Título Centrado con JM resaltado */
         .header h1 { 
-            font-family: 'D3Euronism'; margin: 0; font-size: 26px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.9); 
+            font-family: 'D3Euronism'; 
+            margin: 0; 
+            font-size: 22px; /* Tamaño base para Remodelaciones */
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.9);
+            line-height: 1.2;
+        }
+
+        .header h1 span.jm-text {
+            font-size: 140%; /* 40% más grande */
+            display: block; /* JM en su propia línea para mayor impacto */
+            margin-top: 5px;
         }
         
-        .action-buttons { margin-top: auto; margin-bottom: 95px; display: flex; gap: 8px; z-index: 10; }
+        .action-buttons { 
+            margin-top: auto; 
+            margin-bottom: 110px; /* Espacio para que no lo tape la curva */
+            display: flex; 
+            gap: 8px; 
+            z-index: 10; 
+        }
 
         .btn-round {
-            width: 42px; height: 42px; background: var(--vinotinto); color: white; border-radius: 50%;
+            width: 42px; height: 42px; background: var(--azul-oscuro); color: white; border-radius: 50%;
             display: flex; justify-content: center; align-items: center; text-decoration: none; border: 2px solid white;
         }
 
+        /* Franja del Header */
         .header-curve {
             position: absolute; bottom: 0; left: 0; width: 100%; height: 110px;
             background: url('franja_header.jpg') center/cover;
             clip-path: ellipse(90% 70% at 90% 100%);
-            display: flex; justify-content: flex-end; align-items: center;
+            z-index: 5;
         }
 
+        /* LOGO ENCIMA DE TODO */
         .logo-main {
-            width: 80px; height: 80px; background: white; border-radius: 50%;
-            margin-right: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); overflow: hidden;
+            position: absolute;
+            bottom: 15px; /* Lo sitúa sobre la curva */
+            right: 25px;
+            width: 85px; 
+            height: 85px; 
+            background: white; 
+            border-radius: 50%; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
+            overflow: hidden;
+            z-index: 20; /* Prioridad máxima */
+            border: 3px solid white;
         }
         .logo-main img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -73,9 +107,8 @@
             background: var(--glass); border-radius: 12px; padding: 12px; margin: 0 15px 12px 15px;
             text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06);
         }
-        .glass-card h2 { font-family: 'D3Euronism'; font-size: 18px; margin: 0 0 5px 0; color: var(--vinotinto); }
+        .glass-card h2 { font-family: 'D3Euronism'; font-size: 18px; margin: 0 0 5px 0; color: var(--azul-oscuro); }
 
-        /* --- BOTONES CATALOGO (SIN ICONOS) --- */
         .btn-group { display: flex; flex-direction: row; gap: 6px; margin-top: 10px; }
         .btn-cat {
             flex: 1; text-decoration: none; padding: 12px 4px; border-radius: 20px; font-size: 10px;
@@ -83,7 +116,7 @@
             display: flex; align-items: center; justify-content: center;
         }
         .btn-ws { background: var(--whatsapp); color: white; }
-        .btn-dl { background: var(--vinotinto); color: white; }
+        .btn-dl { background: var(--azul-oscuro); color: white; }
 
         /* --- SLIDER --- */
         .slider-wrapper { width: 100%; position: relative; margin: 5px 0 15px 0; }
@@ -102,13 +135,13 @@
         }
         .prev { left: 8px; } .next { right: 8px; }
 
-        /* --- LIGHTBOX (PANTALLA COMPLETA CON NAVEGACION) --- */
+        /* --- LIGHTBOX --- */
         .lightbox {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95); display: none; justify-content: center;
             align-items: center; z-index: 2000;
         }
-        .lightbox img { max-width: 90%; max-height: 80%; border-radius: 4px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        .lightbox img { max-width: 90%; max-height: 80%; border-radius: 4px; }
         .lb-close { position: absolute; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer; z-index: 2001; }
         .lb-nav {
             position: absolute; top: 50%; transform: translateY(-50%);
@@ -124,8 +157,8 @@
             display: flex; flex-direction: column; align-items: center;
             text-decoration: none; color: var(--texto); font-size: 9px; font-weight: bold;
         }
-        .grid-item i { font-size: 18px; margin-bottom: 4px; color: var(--vinotinto); }
-        .vcard-active { background: var(--vinotinto); color: white; }
+        .grid-item i { font-size: 18px; margin-bottom: 4px; color: var(--azul-oscuro); }
+        .vcard-active { background: var(--azul-oscuro); color: white; }
         .vcard-active i { color: white; }
 
         /* --- BOTON WHATSAPP --- */
@@ -159,24 +192,25 @@
 
 <div class="container">
     <div class="header">
-        <h1>Marian Crochet</h1>
+        <h1>Remodelaciones <span class="jm-text">JM</span></h1>
+        
         <div class="action-buttons">
-            <a href="tel:3013811896" class="btn-round"><i class="fas fa-phone-alt"></i></a>
-            <a href="mailto:mariana.crochet27@gmail.com" class="btn-round"><i class="fas fa-envelope"></i></a>
-            <a href="#" class="btn-round"><i class="fas fa-globe"></i></a>
-            <a href="https://wa.me/573013811896" class="btn-round"><i class="fab fa-whatsapp"></i></a>
+            <a href="tel:3234265407" class="btn-round"><i class="fas fa-phone-alt"></i></a>
+            <a href="mailto:Acabadosyremodelacionesjm505@gmail.com" class="btn-round"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61576484224284" class="btn-round"><i class="fab fa-facebook"></i></a>
+            <a href="https://wa.me/573234265407" class="btn-round"><i class="fab fa-whatsapp"></i></a>
         </div>
-        <div class="header-curve">
-            <div class="logo-main"><img src="logo.png"></div>
-        </div>
+
+        <div class="header-curve"></div>
+        <div class="logo-main"><img src="logo.jpg"></div>
     </div>
 
     <div class="content">
         <div class="glass-card">
             <h2>Hecho a Mano</h2>
-            <p style="margin:0; font-size: 12px;">Creadores de Amigurumis</p>
+            <p style="margin:0; font-size: 12px;">Expertos en Acabados y Remodelaciones</p>
             <div class="btn-group">
-                <a href="https://wa.me/c/573013811896" target="_blank" class="btn-cat btn-ws">CATALOGO WHATSAPP</a>
+                <a href="https://wa.me/c/573234265407" target="_blank" class="btn-cat btn-ws">CATALOGO WHATSAPP</a>
                 <a href="catalogo.pdf" download class="btn-cat btn-dl">DESCARGAR CATALOGO</a>
             </div>
         </div>
@@ -198,19 +232,20 @@
             <form>
                 <input type="text" placeholder="Nombre" style="width:100%; padding:8px; margin-bottom:8px; border-radius:6px; border:1px solid #ddd; box-sizing: border-box;">
                 <textarea placeholder="Tu mensaje..." rows="2" style="width:100%; padding:8px; margin-bottom:8px; border-radius:6px; border:1px solid #ddd; box-sizing: border-box;"></textarea>
-                <button type="submit" style="background:var(--vinotinto); color:white; border:none; padding:10px; border-radius:20px; width:100%; font-weight:bold; cursor:pointer;">ENVIAR</button>
+                <button type="submit" style="background:var(--azul-oscuro); color:white; border:none; padding:10px; border-radius:20px; width:100%; font-weight:bold; cursor:pointer;">ENVIAR</button>
             </form>
         </div>
 
         <div class="glass-card" style="margin-bottom: 20px;">
             <div class="contact-grid">
-                <a href="tel:3013811896" class="grid-item"><i class="fas fa-phone-alt"></i>Llamar</a>
-                <a href="mailto:mariana.crochet27@gmail.com" class="grid-item"><i class="fas fa-envelope"></i>Email</a>
-                <a href="#" class="grid-item"><i class="fas fa-globe"></i>Web</a>
-                <a href="https://wa.me/573013811896" class="grid-item"><i class="fab fa-whatsapp"></i>WhatsApp</a>
-                <a href="#" class="grid-item"><i class="fab fa-facebook"></i>Facebook</a>
-                <a href="#" class="grid-item"><i class="fab fa-instagram"></i>Instagram</a>
-                <a href="#" class="grid-item" onclick="navigator.share({title:'Marian Crochet', url:window.location.href})"><i class="fas fa-share-alt"></i>Compartir</a>
+                <a href="tel:3234265407" class="grid-item"><i class="fas fa-phone-alt"></i>Llamar</a>
+                <a href="mailto:Acabadosyremodelacionesjm505@gmail.com" class="grid-item"><i class="fas fa-envelope"></i>Email</a>
+                <a href="https://www.facebook.com/profile.php?id=61576484224284" class="grid-item"><i class="fas fa-globe"></i>Facebook</a>
+                <a href="https://wa.me/573234265407" class="grid-item"><i class="fab fa-whatsapp"></i>WhatsApp</a>
+                
+                <a href="https://www.facebook.com/profile.php?id=61576484224284" class="grid-item"><i class="fab fa-facebook"></i>Facebook</a>
+                <a href="https://www.instagram.com/juniormunoz2026?igsh=b2txN2s2bmhzenU3" class="grid-item"><i class="fab fa-instagram"></i>Instagram</a>
+                <a href="#" class="grid-item" onclick="navigator.share({title:'Remodelaciones JM', url:window.location.href})"><i class="fas fa-share-alt"></i>Compartir</a>
                 <a href="contacto.vcf" class="grid-item vcard-active"><i class="fas fa-address-card"></i>vCard</a>
             </div>
         </div>
@@ -228,13 +263,13 @@
         <div class="chat-header">
             <img src="logo.png">
             <div>
-                <div style="font-weight:bold; font-size:13px;">Marian Crochet</div>
+                <div style="font-weight:bold; font-size:13px;">Remodelaciones JM</div>
                 <div style="font-size:10px; opacity:0.9;">En linea ahora</div>
             </div>
             <i class="fas fa-times" onclick="toggleChat()" style="margin-left:auto; cursor:pointer;"></i>
         </div>
         <div class="chat-body">
-            <div style="background:white; padding:8px; border-radius:8px; display:inline-block;">Hola! Como podemos ayudarte hoy?</div>
+            <div style="background:white; padding:8px; border-radius:8px; display:inline-block;">Hola! ¿En qué podemos ayudarte con tu remodelación?</div>
         </div>
         <div class="chat-footer">
             <input type="text" id="chatInput" placeholder="Escribe un mensaje...">
@@ -262,23 +297,18 @@
         else s.scrollBy({left: d * w, behavior:'smooth'});
     }
 
-    function manual(d) {
-        clearInterval(auto);
-        move(d);
-        setTimeout(() => { auto = setInterval(() => move(1), 5000); }, 8000);
-    }
+    function manual(d) { clearInterval(auto); move(d); setTimeout(() => { auto = setInterval(() => move(1), 5000); }, 8000); }
 
-    // Lightbox Logic
     function openLightbox(index) {
         currentImgIndex = index;
         updateLightboxImg();
         document.getElementById('lightbox').style.display = 'flex';
-        clearInterval(auto); // Pausar slider mientras se mira pantalla completa
+        clearInterval(auto);
     }
 
     function closeLightbox() {
         document.getElementById('lightbox').style.display = 'none';
-        auto = setInterval(() => move(1), 5000); // Reanudar slider
+        auto = setInterval(() => move(1), 5000);
     }
 
     function changeLbImg(dir) {
@@ -292,7 +322,6 @@
         document.getElementById('lightboxImg').src = images[currentImgIndex];
     }
 
-    // Chat Logic
     function toggleChat() {
         const modal = document.getElementById('chatModal');
         modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
@@ -300,7 +329,7 @@
     function sendWS() {
         const input = document.getElementById('chatInput').value;
         if (input.trim() !== "") {
-            window.open("https://wa.me/573013811896?text=" + encodeURIComponent(input), '_blank');
+            window.open("https://wa.me/573234265407?text=" + encodeURIComponent(input), '_blank');
         }
     }
 </script>
