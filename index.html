@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remodelaciones JM | Tarjeta Digital</title>
     
+    <meta property="og:title" content="Remodelaciones JM - Tarjeta Digital">
+    <meta property="og:description" content="Expertos en acabados y obra blanca. Precisión y elegancia en cada detalle.">
+    <meta property="og:image" content="banner.jpg">
+
     <link rel="icon" type="image/jpg" href="icono.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -45,17 +49,15 @@
             color: white; 
             display: flex; 
             flex-direction: column;
-            /* Eliminado align-items:center para que los botones vuelvan a la izquierda */
         }
 
-        /* Título Centrado con JM resaltado */
         .header h1 { 
             font-family: 'D3Euronism'; 
             margin: 0; 
             font-size: 22px;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.9);
             line-height: 1.2;
-            text-align: center; /* Solo el título se mantiene centrado */
+            text-align: center;
             width: 100%;
         }
 
@@ -71,13 +73,15 @@
             display: flex; 
             gap: 8px; 
             z-index: 10;
-            align-self: flex-start; /* Asegura alineación a la izquierda */
+            align-self: flex-start; /* Botones a la izquierda */
         }
 
         .btn-round {
             width: 42px; height: 42px; background: var(--azul-oscuro); color: white; border-radius: 50%;
             display: flex; justify-content: center; align-items: center; text-decoration: none; border: 2px solid white;
+            transition: transform 0.2s;
         }
+        .btn-round:hover { transform: scale(1.1); }
 
         .header-curve {
             position: absolute; bottom: 0; left: 0; width: 100%; height: 110px;
@@ -109,8 +113,6 @@
         }
         .glass-card h2 { font-family: 'D3Euronism'; font-size: 18px; margin: 0 0 10px 0; color: var(--azul-oscuro); }
 
-        /* Botones de catálogo comentados en el HTML inferior */
-
         /* --- SLIDER --- */
         .slider-wrapper { width: 100%; position: relative; margin: 5px 0 15px 0; }
         .slider-container {
@@ -128,7 +130,27 @@
         }
         .prev { left: 8px; } .next { right: 8px; }
 
-        /* --- GRID CONTACTO --- */
+        /* --- LIGHTBOX --- */
+        .lightbox {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); display: none; justify-content: center;
+            align-items: center; z-index: 2000;
+        }
+        .lightbox img { max-width: 90%; max-height: 80%; border-radius: 4px; }
+        .lb-close { 
+            position: absolute; top: 30px; right: 20px; color: white; font-size: 25px; 
+            cursor: pointer; z-index: 2001; background: rgba(255,255,255,0.1); 
+            width: 50px; height: 50px; display: flex; align-items: center; 
+            justify-content: center; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3);
+        }
+        .lb-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.1); border: none; width: 50px; height: 50px;
+            border-radius: 50%; color: white; font-size: 24px; cursor: pointer; z-index: 2001;
+        }
+        .lb-prev { left: 10px; } .lb-next { right: 10px; }
+
+        /* --- GRID CONTACTO 4x2 --- */
         .contact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
         .grid-item {
             background: #fff; border-radius: 8px; padding: 10px 0;
@@ -165,7 +187,7 @@
         <div class="glass-card">
             <h2>Excelencia en Acabados</h2>
             <p style="margin:0; font-size: 13px; line-height: 1.6; text-align: justify; color: #444;">
-                En <strong>Remodelaciones JM</strong> transformamos espacios convencionales en obras maestras de la construcción. Especialistas en acabados de obra blanca, integramos precisión técnica con una estética impecable para dar vida a su visión. Nuestro compromiso es la entrega de proyectos con los más altos estándares de calidad, garantizando durabilidad y elegancia en cada detalle de su hogar o negocio.
+                En <strong>Remodelaciones JM</strong> transformamos espacios convencionales en obras maestras de la construcción. Especialistas en acabados de obra blanca, integramos precisión técnica con una estética impecable para dar vida a su visión. Nuestro compromiso es la entrega de proyectos con los más altos estándares de calidad, garantizando durabilidad y elegancia en cada detalle.
             </p>
             
             </div>
@@ -195,26 +217,25 @@
             <div class="contact-grid">
                 <a href="tel:3234265407" class="grid-item"><i class="fas fa-phone-alt"></i>Llamar</a>
                 <a href="mailto:Acabadosyremodelacionesjm505@gmail.com" class="grid-item"><i class="fas fa-envelope"></i>Email</a>
-                <a href="https://www.facebook.com/profile.php?id=61576484224284" class="grid-item"><i class="fab fa-facebook"></i>Facebook</a>
+                <a href="https://www.facebook.com/profile.php?id=61576484224284" class="grid-item"><i class="fab fa-facebook-f"></i>Web</a>
                 <a href="https://wa.me/573234265407" class="grid-item"><i class="fab fa-whatsapp"></i>WhatsApp</a>
                 
                 <a href="https://www.facebook.com/profile.php?id=61576484224284" class="grid-item"><i class="fab fa-facebook"></i>Facebook</a>
-                <a href="https://www.instagram.com/juniormunoz2026?igsh=b2txN2s2bmhzenU3" class="grid-item"><i class="fab fa-instagram"></i>Instagram</a>
+                <a href="https://www.instagram.com/juniormunoz2026" class="grid-item"><i class="fab fa-instagram"></i>Instagram</a>
                 <a href="#" class="grid-item" onclick="navigator.share({title:'Remodelaciones JM', url:window.location.href})"><i class="fas fa-share-alt"></i>Compartir</a>
                 <a href="contacto.vcf" class="grid-item vcard-active"><i class="fas fa-address-card"></i>vCard</a>
             </div>
         </div>
     </div>
 
-    <div id="lightbox" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 2000;">
-        <span onclick="closeLightbox()" style="position: absolute; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer; z-index: 2001;">&times;</span>
-        <button onclick="changeLbImg(-1)" style="position: absolute; left: 10px; background: rgba(255,255,255,0.1); border: none; width: 50px; height: 50px; border-radius: 50%; color: white; font-size: 24px; cursor: pointer;">❮</button>
-        <img id="lightboxImg" src="" style="max-width: 90%; max-height: 80%; border-radius: 4px;">
-        <button onclick="changeLbImg(1)" style="position: absolute; right: 10px; background: rgba(255,255,255,0.1); border: none; width: 50px; height: 50px; border-radius: 50%; color: white; font-size: 24px; cursor: pointer;">❯</button>
+    <div id="lightbox" class="lightbox">
+        <span class="lb-close" onclick="closeLightbox()"><i class="fas fa-times"></i></span>
+        <button class="lb-nav lb-prev" onclick="changeLbImg(-1)">❮</button>
+        <img id="lightboxImg" src="">
+        <button class="lb-nav lb-next" onclick="changeLbImg(1)">❯</button>
     </div>
 
     <div class="ws-float" onclick="toggleChat()" style="position: fixed; bottom: 0; right: 0; background: var(--whatsapp); color: white; width: 44px; height: 44px; border-radius: 100% 100% 0 100%; display: flex; justify-content: center; align-items: center; font-size: 24px; box-shadow: -2px -2px 10px rgba(0,0,0,0.2); cursor: pointer; z-index: 1000;"><i class="fab fa-whatsapp"></i></div>
-    
     <div class="chat-modal" id="chatModal" style="position: fixed; bottom: 50px; right: 10px; width: 280px; background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; z-index: 1001;">
         <div style="background: var(--whatsapp); color: white; padding: 12px; display: flex; align-items: center; gap: 10px;">
             <img src="logo.jpg" style="width: 30px; height: 30px; border-radius: 50%; background: white;">
