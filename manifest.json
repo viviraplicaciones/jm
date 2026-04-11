@@ -1,0 +1,22 @@
+{
+  "name": "Remodelaciones JM",
+  "short_name": "JM App",
+  "description": "Expertos en acabados y obra blanca.",
+  "start_url": "index.html",
+  "display": "fullscreen",
+  "background_color": "#1a2a4b",
+  "theme_color": "#1a2a4b",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icono.jpg",
+      "sizes": "192x192",
+      "type": "image/jpg"
+    },
+    {
+      "src": "logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpg"
+    }
+  ]
+}
