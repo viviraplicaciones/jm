@@ -45,31 +45,33 @@
             color: white; 
             display: flex; 
             flex-direction: column;
-            align-items: center; /* Centra el contenido horizontalmente */
-            text-align: center;
+            /* Eliminado align-items:center para que los botones vuelvan a la izquierda */
         }
 
         /* Título Centrado con JM resaltado */
         .header h1 { 
             font-family: 'D3Euronism'; 
             margin: 0; 
-            font-size: 22px; /* Tamaño base para Remodelaciones */
+            font-size: 22px;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.9);
             line-height: 1.2;
+            text-align: center; /* Solo el título se mantiene centrado */
+            width: 100%;
         }
 
         .header h1 span.jm-text {
-            font-size: 140%; /* 40% más grande */
-            display: block; /* JM en su propia línea para mayor impacto */
+            font-size: 140%;
+            display: block;
             margin-top: 5px;
         }
         
         .action-buttons { 
             margin-top: auto; 
-            margin-bottom: 110px; /* Espacio para que no lo tape la curva */
+            margin-bottom: 110px;
             display: flex; 
             gap: 8px; 
-            z-index: 10; 
+            z-index: 10;
+            align-self: flex-start; /* Asegura alineación a la izquierda */
         }
 
         .btn-round {
@@ -77,7 +79,6 @@
             display: flex; justify-content: center; align-items: center; text-decoration: none; border: 2px solid white;
         }
 
-        /* Franja del Header */
         .header-curve {
             position: absolute; bottom: 0; left: 0; width: 100%; height: 110px;
             background: url('franja_header.jpg') center/cover;
@@ -85,10 +86,9 @@
             z-index: 5;
         }
 
-        /* LOGO ENCIMA DE TODO */
         .logo-main {
             position: absolute;
-            bottom: 15px; /* Lo sitúa sobre la curva */
+            bottom: 15px; 
             right: 25px;
             width: 85px; 
             height: 85px; 
@@ -96,7 +96,7 @@
             border-radius: 50%; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
             overflow: hidden;
-            z-index: 20; /* Prioridad máxima */
+            z-index: 20; 
             border: 3px solid white;
         }
         .logo-main img { width: 100%; height: 100%; object-fit: cover; }
@@ -104,19 +104,12 @@
         /* --- CUERPO --- */
         .content { padding-top: 5px; flex-grow: 1; }
         .glass-card {
-            background: var(--glass); border-radius: 12px; padding: 12px; margin: 0 15px 12px 15px;
+            background: var(--glass); border-radius: 12px; padding: 15px; margin: 0 15px 12px 15px;
             text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06);
         }
-        .glass-card h2 { font-family: 'D3Euronism'; font-size: 18px; margin: 0 0 5px 0; color: var(--azul-oscuro); }
+        .glass-card h2 { font-family: 'D3Euronism'; font-size: 18px; margin: 0 0 10px 0; color: var(--azul-oscuro); }
 
-        .btn-group { display: flex; flex-direction: row; gap: 6px; margin-top: 10px; }
-        .btn-cat {
-            flex: 1; text-decoration: none; padding: 12px 4px; border-radius: 20px; font-size: 10px;
-            font-weight: bold; font-family: 'D3Euronism', sans-serif; 
-            display: flex; align-items: center; justify-content: center;
-        }
-        .btn-ws { background: var(--whatsapp); color: white; }
-        .btn-dl { background: var(--azul-oscuro); color: white; }
+        /* Botones de catálogo comentados en el HTML inferior */
 
         /* --- SLIDER --- */
         .slider-wrapper { width: 100%; position: relative; margin: 5px 0 15px 0; }
@@ -135,21 +128,6 @@
         }
         .prev { left: 8px; } .next { right: 8px; }
 
-        /* --- LIGHTBOX --- */
-        .lightbox {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); display: none; justify-content: center;
-            align-items: center; z-index: 2000;
-        }
-        .lightbox img { max-width: 90%; max-height: 80%; border-radius: 4px; }
-        .lb-close { position: absolute; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer; z-index: 2001; }
-        .lb-nav {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(255,255,255,0.1); border: none; width: 50px; height: 50px;
-            border-radius: 50%; color: white; font-size: 24px; cursor: pointer; z-index: 2001;
-        }
-        .lb-prev { left: 10px; } .lb-next { right: 10px; }
-
         /* --- GRID CONTACTO --- */
         .contact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
         .grid-item {
@@ -161,31 +139,9 @@
         .vcard-active { background: var(--azul-oscuro); color: white; }
         .vcard-active i { color: white; }
 
-        /* --- BOTON WHATSAPP --- */
-        .ws-float {
-            position: fixed; bottom: 0; right: 0; background: var(--whatsapp);
-            color: white; width: 44px; height: 44px;
-            border-radius: 100% 100% 0 100%; 
-            display: flex; justify-content: center; align-items: center;
-            font-size: 24px; box-shadow: -2px -2px 10px rgba(0,0,0,0.2);
-            cursor: pointer; z-index: 1000;
-        }
-
-        .chat-modal {
-            position: fixed; bottom: 50px; right: 10px; width: 280px;
-            background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            display: none; flex-direction: column; overflow: hidden; z-index: 1001;
-        }
-        .chat-header { background: var(--whatsapp); color: white; padding: 12px; display: flex; align-items: center; gap: 10px; }
-        .chat-header img { width: 30px; height: 30px; border-radius: 50%; background: white; }
-        .chat-body { padding: 15px; background: #e5ddd5; font-size: 12px; }
-        .chat-footer { padding: 8px; display: flex; gap: 5px; }
-        .chat-footer input { flex: 1; border: 1px solid #ddd; padding: 6px; border-radius: 20px; font-size: 11px; }
-        .chat-footer button { background: var(--whatsapp); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; }
-
+        /* --- FOOTER --- */
         .footer-link { text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 8px; background: rgba(0,0,0,0.08); margin-top: auto; }
         .footer-content { font-size: 9px; color: #444; display: flex; align-items: center; gap: 4px; }
-        .vivirapp-logo { height: 14px; }
     </style>
 </head>
 <body>
@@ -207,13 +163,12 @@
 
     <div class="content">
         <div class="glass-card">
-            <h2>Hecho a Mano</h2>
-            <p style="margin:0; font-size: 12px;">Expertos en Acabados y Remodelaciones</p>
-            <div class="btn-group">
-                <a href="https://wa.me/c/573234265407" target="_blank" class="btn-cat btn-ws">CATALOGO WHATSAPP</a>
-                <a href="catalogo.pdf" download class="btn-cat btn-dl">DESCARGAR CATALOGO</a>
+            <h2>Excelencia en Acabados</h2>
+            <p style="margin:0; font-size: 13px; line-height: 1.6; text-align: justify; color: #444;">
+                En <strong>Remodelaciones JM</strong> transformamos espacios convencionales en obras maestras de la construcción. Especialistas en acabados de obra blanca, integramos precisión técnica con una estética impecable para dar vida a su visión. Nuestro compromiso es la entrega de proyectos con los más altos estándares de calidad, garantizando durabilidad y elegancia en cada detalle de su hogar o negocio.
+            </p>
+            
             </div>
-        </div>
 
         <div class="slider-wrapper">
             <button class="nav-btn prev" onclick="manual(-1)">❮</button>
@@ -228,11 +183,11 @@
         </div>
 
         <div class="glass-card">
-            <h2>Contacto</h2>
+            <h2>Cotice su Proyecto</h2>
             <form>
                 <input type="text" placeholder="Nombre" style="width:100%; padding:8px; margin-bottom:8px; border-radius:6px; border:1px solid #ddd; box-sizing: border-box;">
-                <textarea placeholder="Tu mensaje..." rows="2" style="width:100%; padding:8px; margin-bottom:8px; border-radius:6px; border:1px solid #ddd; box-sizing: border-box;"></textarea>
-                <button type="submit" style="background:var(--azul-oscuro); color:white; border:none; padding:10px; border-radius:20px; width:100%; font-weight:bold; cursor:pointer;">ENVIAR</button>
+                <textarea placeholder="Cuéntenos su idea..." rows="2" style="width:100%; padding:8px; margin-bottom:8px; border-radius:6px; border:1px solid #ddd; box-sizing: border-box;"></textarea>
+                <button type="submit" style="background:var(--azul-oscuro); color:white; border:none; padding:10px; border-radius:20px; width:100%; font-weight:bold; cursor:pointer;">ENVIAR SOLICITUD</button>
             </form>
         </div>
 
@@ -240,7 +195,7 @@
             <div class="contact-grid">
                 <a href="tel:3234265407" class="grid-item"><i class="fas fa-phone-alt"></i>Llamar</a>
                 <a href="mailto:Acabadosyremodelacionesjm505@gmail.com" class="grid-item"><i class="fas fa-envelope"></i>Email</a>
-                <a href="https://www.facebook.com/profile.php?id=61576484224284" class="grid-item"><i class="fas fa-globe"></i>Facebook</a>
+                <a href="https://www.facebook.com/profile.php?id=61576484224284" class="grid-item"><i class="fab fa-facebook"></i>Facebook</a>
                 <a href="https://wa.me/573234265407" class="grid-item"><i class="fab fa-whatsapp"></i>WhatsApp</a>
                 
                 <a href="https://www.facebook.com/profile.php?id=61576484224284" class="grid-item"><i class="fab fa-facebook"></i>Facebook</a>
@@ -251,35 +206,36 @@
         </div>
     </div>
 
-    <div id="lightbox" class="lightbox">
-        <span class="lb-close" onclick="closeLightbox()">&times;</span>
-        <button class="lb-nav lb-prev" onclick="changeLbImg(-1)">❮</button>
-        <img id="lightboxImg" src="">
-        <button class="lb-nav lb-next" onclick="changeLbImg(1)">❯</button>
+    <div id="lightbox" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 2000;">
+        <span onclick="closeLightbox()" style="position: absolute; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer; z-index: 2001;">&times;</span>
+        <button onclick="changeLbImg(-1)" style="position: absolute; left: 10px; background: rgba(255,255,255,0.1); border: none; width: 50px; height: 50px; border-radius: 50%; color: white; font-size: 24px; cursor: pointer;">❮</button>
+        <img id="lightboxImg" src="" style="max-width: 90%; max-height: 80%; border-radius: 4px;">
+        <button onclick="changeLbImg(1)" style="position: absolute; right: 10px; background: rgba(255,255,255,0.1); border: none; width: 50px; height: 50px; border-radius: 50%; color: white; font-size: 24px; cursor: pointer;">❯</button>
     </div>
 
-    <div class="ws-float" onclick="toggleChat()"><i class="fab fa-whatsapp"></i></div>
-    <div class="chat-modal" id="chatModal">
-        <div class="chat-header">
-            <img src="logo.png">
+    <div class="ws-float" onclick="toggleChat()" style="position: fixed; bottom: 0; right: 0; background: var(--whatsapp); color: white; width: 44px; height: 44px; border-radius: 100% 100% 0 100%; display: flex; justify-content: center; align-items: center; font-size: 24px; box-shadow: -2px -2px 10px rgba(0,0,0,0.2); cursor: pointer; z-index: 1000;"><i class="fab fa-whatsapp"></i></div>
+    
+    <div class="chat-modal" id="chatModal" style="position: fixed; bottom: 50px; right: 10px; width: 280px; background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; z-index: 1001;">
+        <div style="background: var(--whatsapp); color: white; padding: 12px; display: flex; align-items: center; gap: 10px;">
+            <img src="logo.jpg" style="width: 30px; height: 30px; border-radius: 50%; background: white;">
             <div>
                 <div style="font-weight:bold; font-size:13px;">Remodelaciones JM</div>
-                <div style="font-size:10px; opacity:0.9;">En linea ahora</div>
+                <div style="font-size:10px; opacity:0.9;">En línea ahora</div>
             </div>
             <i class="fas fa-times" onclick="toggleChat()" style="margin-left:auto; cursor:pointer;"></i>
         </div>
-        <div class="chat-body">
-            <div style="background:white; padding:8px; border-radius:8px; display:inline-block;">Hola! ¿En qué podemos ayudarte con tu remodelación?</div>
+        <div style="padding: 15px; background: #e5ddd5; font-size: 12px;">
+            <div style="background:white; padding:8px; border-radius:8px; display:inline-block;">Hola! ¿En qué podemos ayudarte con tu proyecto?</div>
         </div>
-        <div class="chat-footer">
-            <input type="text" id="chatInput" placeholder="Escribe un mensaje...">
-            <button onclick="sendWS()"><i class="fas fa-paper-plane"></i></button>
+        <div style="padding: 8px; display: flex; gap: 5px;">
+            <input type="text" id="chatInput" placeholder="Escribe un mensaje..." style="flex: 1; border: 1px solid #ddd; padding: 6px; border-radius: 20px; font-size: 11px;">
+            <button onclick="sendWS()" style="background: var(--whatsapp); border: none; color: white; width: 30px; height: 30px; border-radius: 50%;"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
 
     <a href="https://viviraplicaciones.github.io/vivirapp/" class="footer-link">
         <div class="footer-content">
-            <img src="vivirapp.png" class="vivirapp-logo">
+            <img src="vivirapp.png" style="height: 14px;">
             <span>By VivirApp &copy; 2026 • Colombia</span>
         </div>
     </a>
@@ -301,7 +257,7 @@
 
     function openLightbox(index) {
         currentImgIndex = index;
-        updateLightboxImg();
+        document.getElementById('lightboxImg').src = images[currentImgIndex];
         document.getElementById('lightbox').style.display = 'flex';
         clearInterval(auto);
     }
@@ -315,10 +271,6 @@
         currentImgIndex += dir;
         if (currentImgIndex >= images.length) currentImgIndex = 0;
         if (currentImgIndex < 0) currentImgIndex = images.length - 1;
-        updateLightboxImg();
-    }
-
-    function updateLightboxImg() {
         document.getElementById('lightboxImg').src = images[currentImgIndex];
     }
 
