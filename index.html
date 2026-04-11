@@ -75,18 +75,12 @@
         }
         .glass-card h2 { font-family: 'D3Euronism'; font-size: 18px; margin: 0 0 5px 0; color: var(--vinotinto); }
 
-        /* --- BOTONES CATALOGO (En una sola linea y sin tildes) --- */
-        .btn-group { 
-            display: flex; 
-            flex-direction: row; /* Misma linea */
-            gap: 6px; 
-            margin-top: 10px; 
-        }
+        /* --- BOTONES CATALOGO (SIN ICONOS) --- */
+        .btn-group { display: flex; flex-direction: row; gap: 6px; margin-top: 10px; }
         .btn-cat {
-            flex: 1; /* Ocupan mitad y mitad */
-            text-decoration: none; padding: 8px 4px; border-radius: 20px; font-size: 9px;
+            flex: 1; text-decoration: none; padding: 12px 4px; border-radius: 20px; font-size: 10px;
             font-weight: bold; font-family: 'D3Euronism', sans-serif; 
-            display: flex; align-items: center; justify-content: center; gap: 4px;
+            display: flex; align-items: center; justify-content: center;
         }
         .btn-ws { background: var(--whatsapp); color: white; }
         .btn-dl { background: var(--vinotinto); color: white; }
@@ -98,15 +92,30 @@
             scrollbar-width: none; scroll-behavior: smooth;
         }
         .slider-container::-webkit-scrollbar { display: none; }
-        .slider-item { flex: 0 0 100%; scroll-snap-align: center; height: 300px; }
+        .slider-item { flex: 0 0 100%; scroll-snap-align: center; height: 300px; cursor: zoom-in; }
         .slider-item img { width: 100%; height: 100%; object-fit: cover; }
         
         .nav-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(255,255,255,0.3); border: none; width: 30px; height: 30px;
+            background: rgba(255,255,255,0.3); border: none; width: 35px; height: 35px;
             border-radius: 50%; color: white; cursor: pointer; z-index: 5;
         }
         .prev { left: 8px; } .next { right: 8px; }
+
+        /* --- LIGHTBOX (PANTALLA COMPLETA CON NAVEGACION) --- */
+        .lightbox {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); display: none; justify-content: center;
+            align-items: center; z-index: 2000;
+        }
+        .lightbox img { max-width: 90%; max-height: 80%; border-radius: 4px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        .lb-close { position: absolute; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer; z-index: 2001; }
+        .lb-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.1); border: none; width: 50px; height: 50px;
+            border-radius: 50%; color: white; font-size: 24px; cursor: pointer; z-index: 2001;
+        }
+        .lb-prev { left: 10px; } .lb-next { right: 10px; }
 
         /* --- GRID CONTACTO --- */
         .contact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
@@ -119,20 +128,14 @@
         .vcard-active { background: var(--vinotinto); color: white; }
         .vcard-active i { color: white; }
 
-        /* --- BOTON WHATSAPP PERSONALIZADO --- */
+        /* --- BOTON WHATSAPP --- */
         .ws-float {
-            position: fixed; 
-            bottom: 0; /* Bien pegado abajo */
-            right: 0;  /* Bien pegado a la derecha */
-            background: var(--whatsapp);
-            color: white; 
-            width: 44px; /* Un 20% más pequeño aprox */
-            height: 44px;
-            /* Esquinas redondeadas excepto la inferior derecha */
+            position: fixed; bottom: 0; right: 0; background: var(--whatsapp);
+            color: white; width: 44px; height: 44px;
             border-radius: 100% 100% 0 100%; 
             display: flex; justify-content: center; align-items: center;
             font-size: 24px; box-shadow: -2px -2px 10px rgba(0,0,0,0.2);
-            cursor: pointer; z-index: 1000; transition: 0.3s;
+            cursor: pointer; z-index: 1000;
         }
 
         .chat-modal {
@@ -173,23 +176,19 @@
             <h2>Hecho a Mano</h2>
             <p style="margin:0; font-size: 12px;">Creadores de Amigurumis</p>
             <div class="btn-group">
-                <a href="https://wa.me/c/573013811896" target="_blank" class="btn-cat btn-ws">
-                    <i class="fab fa-whatsapp"></i> CATALOGO WHATSAPP
-                </a>
-                <a href="catalogo.pdf" download class="btn-cat btn-dl">
-                    <i class="fas fa-file-download"></i> DESCARGAR CATALOGO
-                </a>
+                <a href="https://wa.me/c/573013811896" target="_blank" class="btn-cat btn-ws">CATALOGO WHATSAPP</a>
+                <a href="catalogo.pdf" download class="btn-cat btn-dl">DESCARGAR CATALOGO</a>
             </div>
         </div>
 
         <div class="slider-wrapper">
             <button class="nav-btn prev" onclick="manual(-1)">❮</button>
             <div class="slider-container" id="slider">
-                <div class="slider-item"><img src="01.jpg" loading="lazy"></div>
-                <div class="slider-item"><img src="02.jpg" loading="lazy"></div>
-                <div class="slider-item"><img src="03.jpg" loading="lazy"></div>
-                <div class="slider-item"><img src="04.jpg" loading="lazy"></div>
-                <div class="slider-item"><img src="05.jpg" loading="lazy"></div>
+                <div class="slider-item" onclick="openLightbox(0)"><img src="01.jpg" loading="lazy"></div>
+                <div class="slider-item" onclick="openLightbox(1)"><img src="02.jpg" loading="lazy"></div>
+                <div class="slider-item" onclick="openLightbox(2)"><img src="03.jpg" loading="lazy"></div>
+                <div class="slider-item" onclick="openLightbox(3)"><img src="04.jpg" loading="lazy"></div>
+                <div class="slider-item" onclick="openLightbox(4)"><img src="05.jpg" loading="lazy"></div>
             </div>
             <button class="nav-btn next" onclick="manual(1)">❯</button>
         </div>
@@ -217,11 +216,17 @@
         </div>
     </div>
 
+    <div id="lightbox" class="lightbox">
+        <span class="lb-close" onclick="closeLightbox()">&times;</span>
+        <button class="lb-nav lb-prev" onclick="changeLbImg(-1)">❮</button>
+        <img id="lightboxImg" src="">
+        <button class="lb-nav lb-next" onclick="changeLbImg(1)">❯</button>
+    </div>
+
     <div class="ws-float" onclick="toggleChat()"><i class="fab fa-whatsapp"></i></div>
-    
     <div class="chat-modal" id="chatModal">
         <div class="chat-header">
-            <img src="logo.png" alt="M">
+            <img src="logo.png">
             <div>
                 <div style="font-weight:bold; font-size:13px;">Marian Crochet</div>
                 <div style="font-size:10px; opacity:0.9;">En linea ahora</div>
@@ -247,14 +252,47 @@
 
 <script>
     const s = document.getElementById('slider');
+    const images = ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg"];
+    let currentImgIndex = 0;
     let auto = setInterval(() => move(1), 4000);
+
     function move(d) {
         const w = s.clientWidth;
         if (d === 1 && s.scrollLeft >= (s.scrollWidth - w - 5)) s.scrollTo({left:0, behavior:'smooth'});
         else s.scrollBy({left: d * w, behavior:'smooth'});
     }
-    function manual(d) { clearInterval(auto); move(d); setTimeout(() => { auto = setInterval(() => move(1), 5000); }, 8000); }
 
+    function manual(d) {
+        clearInterval(auto);
+        move(d);
+        setTimeout(() => { auto = setInterval(() => move(1), 5000); }, 8000);
+    }
+
+    // Lightbox Logic
+    function openLightbox(index) {
+        currentImgIndex = index;
+        updateLightboxImg();
+        document.getElementById('lightbox').style.display = 'flex';
+        clearInterval(auto); // Pausar slider mientras se mira pantalla completa
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').style.display = 'none';
+        auto = setInterval(() => move(1), 5000); // Reanudar slider
+    }
+
+    function changeLbImg(dir) {
+        currentImgIndex += dir;
+        if (currentImgIndex >= images.length) currentImgIndex = 0;
+        if (currentImgIndex < 0) currentImgIndex = images.length - 1;
+        updateLightboxImg();
+    }
+
+    function updateLightboxImg() {
+        document.getElementById('lightboxImg').src = images[currentImgIndex];
+    }
+
+    // Chat Logic
     function toggleChat() {
         const modal = document.getElementById('chatModal');
         modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
