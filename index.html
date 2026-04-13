@@ -10,9 +10,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
+    <meta property="og:type" content="website">
     <meta property="og:title" content="Remodelaciones JM - Tarjeta Digital">
     <meta property="og:description" content="Expertos en acabados y obra blanca. Precisión y elegancia en cada detalle.">
-    <meta property="og:image" content="banner.jpg">
+    <meta property="og:image" content="https://viviraplicaciones.github.io/jm/banner.jpg">
+    <meta property="og:url" content="https://viviraplicaciones.github.io/jm/">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
     <link rel="icon" type="image/jpg" href="icono.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -209,10 +213,10 @@
 
         <div class="glass-card">
             <h2>Cotice su Proyecto</h2>
-            <form>
-                <input type="text" placeholder="Nombre" style="width:100%; padding:8px; margin-bottom:8px; border-radius:6px; border:1px solid #ddd; box-sizing: border-box;">
-                <textarea placeholder="Cuéntenos su idea..." rows="2" style="width:100%; padding:8px; margin-bottom:8px; border-radius:6px; border:1px solid #ddd; box-sizing: border-box;"></textarea>
-                <button type="submit" style="background:var(--azul-oscuro); color:white; border:none; padding:10px; border-radius:20px; width:100%; font-weight:bold; cursor:pointer;">ENVIAR SOLICITUD</button>
+            <form id="quoteForm">
+                <input type="text" id="clientName" placeholder="Su Nombre" required style="width:100%; padding:8px; margin-bottom:8px; border-radius:6px; border:1px solid #ddd; box-sizing: border-box;">
+                <textarea id="clientProject" placeholder="¿Qué proyecto desea realizar?" rows="2" required style="width:100%; padding:8px; margin-bottom:8px; border-radius:6px; border:1px solid #ddd; box-sizing: border-box;"></textarea>
+                <button type="submit" style="background:var(--azul-oscuro); color:white; border:none; padding:10px; border-radius:20px; width:100%; font-weight:bold; cursor:pointer;">ENVIAR A WHATSAPP</button>
             </form>
         </div>
 
@@ -253,7 +257,7 @@
         </div>
         <div style="padding: 8px; display: flex; gap: 5px;">
             <input type="text" id="chatInput" placeholder="Escribe un mensaje..." style="flex: 1; border: 1px solid #ddd; padding: 6px; border-radius: 20px; font-size: 11px;">
-            <button onclick="sendWS()" style="background: var(--whatsapp); border: none; color: white; width: 30px; height: 30px; border-radius: 50%;"><i class="fas fa-paper-plane"></i></button>
+            <button onclick="sendWSChat()" style="background: var(--whatsapp); border: none; color: white; width: 30px; height: 30px; border-radius: 50%;"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
 
@@ -266,28 +270,35 @@
 </div>
 
 <script>
-    // Registro de Service Worker para PWA
+    // Registro de PWA y actualización automática
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js').then(registration => {
-                registration.onupdatefound = () => {
-                    const installingWorker = registration.installing;
-                    installingWorker.onstatechange = () => {
-                        if (installingWorker.state === 'installed') {
-                            if (navigator.serviceWorker.controller) {
-                                window.location.reload();
-                            }
+            navigator.serviceWorker.register('sw.js').then(reg => {
+                reg.onupdatefound = () => {
+                    const inst = reg.installing;
+                    inst.onstatechange = () => {
+                        if (inst.state === 'installed' && navigator.serviceWorker.controller) {
+                            window.location.reload();
                         }
                     };
                 };
-            }).catch(err => console.log('Error de SW', err));
+            });
         });
     }
 
-    // Lógica Slider
+    // Formulario de Cotización a WhatsApp
+    document.getElementById('quoteForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('clientName').value;
+        const project = document.getElementById('clientProject').value;
+        const msg = `Hola Remodelaciones JM, mi nombre es ${name}. Me gustaría cotizar el siguiente proyecto: ${project}`;
+        window.open(`https://wa.me/573234265407?text=${encodeURIComponent(msg)}`, '_blank');
+    });
+
+    // Slider
     const s = document.getElementById('slider');
-    const images = ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg"];
-    let currentImgIndex = 0;
+    const imgs = ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg"];
+    let currIdx = 0;
     let auto = setInterval(() => move(1), 4000);
 
     function move(d) {
@@ -298,36 +309,30 @@
 
     function manual(d) { clearInterval(auto); move(d); setTimeout(() => { auto = setInterval(() => move(1), 5000); }, 8000); }
 
-    // Lógica Lightbox
-    function openLightbox(index) {
-        currentImgIndex = index;
-        document.getElementById('lightboxImg').src = images[currentImgIndex];
+    // Lightbox
+    function openLightbox(idx) {
+        currIdx = idx;
+        document.getElementById('lightboxImg').src = imgs[currIdx];
         document.getElementById('lightbox').style.display = 'flex';
         clearInterval(auto);
     }
-
     function closeLightbox() {
         document.getElementById('lightbox').style.display = 'none';
         auto = setInterval(() => move(1), 5000);
     }
-
     function changeLbImg(dir) {
-        currentImgIndex += dir;
-        if (currentImgIndex >= images.length) currentImgIndex = 0;
-        if (currentImgIndex < 0) currentImgIndex = images.length - 1;
-        document.getElementById('lightboxImg').src = images[currentImgIndex];
+        currIdx = (currIdx + dir + imgs.length) % imgs.length;
+        document.getElementById('lightboxImg').src = imgs[currIdx];
     }
 
-    // Lógica Chat
+    // Chat Flotante
     function toggleChat() {
-        const modal = document.getElementById('chatModal');
-        modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+        const m = document.getElementById('chatModal');
+        m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
     }
-    function sendWS() {
-        const input = document.getElementById('chatInput').value;
-        if (input.trim() !== "") {
-            window.open("https://wa.me/573234265407?text=" + encodeURIComponent(input), '_blank');
-        }
+    function sendWSChat() {
+        const i = document.getElementById('chatInput').value;
+        if (i.trim()) window.open("https://wa.me/573234265407?text=" + encodeURIComponent(i), '_blank');
     }
 </script>
 </body>
