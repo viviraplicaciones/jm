@@ -152,33 +152,20 @@
         .vcard-active { background: var(--azul-oscuro); color: white; }
         .vcard-active i { color: white; }
 
-        /* --- CHAT WHATSAPP RESTAURADO --- */
+        /* --- CHAT WHATSAPP (ESTILO BOCADILLO) --- */
         .ws-float {
-            position: fixed; 
-            bottom: 0; 
-            right: 0; 
-            background: var(--whatsapp);
-            color: white; 
-            width: 44px; 
-            height: 44px;
-            border-radius: 100% 100% 0 100%; /* Forma de bocadillo */
+            position: fixed; bottom: 0; right: 0; background: var(--whatsapp);
+            color: white; width: 44px; height: 44px;
+            border-radius: 100% 100% 0 100%; 
             display: flex; justify-content: center; align-items: center;
             font-size: 24px; box-shadow: -2px -2px 10px rgba(0,0,0,0.2);
-            cursor: pointer; z-index: 1000; transition: 0.3s;
+            cursor: pointer; z-index: 1000;
         }
 
         .chat-modal {
-            position: fixed; 
-            bottom: 50px; 
-            right: 10px; 
-            width: 280px;
-            background: white; 
-            border-radius: 15px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            display: none; 
-            flex-direction: column; 
-            overflow: hidden; 
-            z-index: 1001;
+            position: fixed; bottom: 50px; right: 10px; width: 280px;
+            background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            display: none; flex-direction: column; overflow: hidden; z-index: 1001;
             animation: slideUp 0.3s ease;
         }
 
@@ -234,8 +221,8 @@
         <div class="glass-card">
             <h2>Cotice su Proyecto</h2>
             <form id="quoteForm">
-                <input type="text" id="clientName" placeholder="Su Nombre" required style="width:100%; padding:10px; margin-bottom:8px; border-radius:6px; border:1px solid #ddd;">
-                <textarea id="clientProject" placeholder="¿Qué proyecto desea realizar?" rows="2" required style="width:100%; padding:10px; margin-bottom:8px; border-radius:6px; border:1px solid #ddd;"></textarea>
+                <input type="text" id="clientName" placeholder="Su Nombre (Obligatorio)" required style="width:100%; padding:10px; margin-bottom:8px; border-radius:6px; border:1px solid #ddd; outline:none;">
+                <textarea id="clientProject" placeholder="¿Qué proyecto desea realizar? (Obligatorio)" rows="2" required style="width:100%; padding:10px; margin-bottom:8px; border-radius:6px; border:1px solid #ddd; outline:none; font-family:inherit;"></textarea>
                 <button type="submit" style="background:var(--azul-oscuro); color:white; border:none; padding:12px; border-radius:20px; width:100%; font-weight:bold; cursor:pointer;">ENVIAR A WHATSAPP</button>
             </form>
         </div>
@@ -262,7 +249,6 @@
     </div>
 
     <div class="ws-float" onclick="toggleChat()"><i class="fab fa-whatsapp"></i></div>
-    
     <div class="chat-modal" id="chatModal">
         <div class="chat-header">
             <img src="logo.jpg">
@@ -290,7 +276,7 @@
 </div>
 
 <script>
-    // Registro PWA
+    // Registro PWA y actualización automática
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('sw.js').then(reg => {
@@ -300,18 +286,23 @@
                         if (inst.state === 'installed' && navigator.serviceWorker.controller) window.location.reload();
                     };
                 };
-            });
+            }).catch(err => console.log('Error de SW', err));
         });
     }
 
-    // Formulario de Cotización
+    // Formulario de Cotización Validado
     document.getElementById('quoteForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        const msg = `Hola Remodelaciones JM, soy ${document.getElementById('clientName').value}. Cotización: ${document.getElementById('clientProject').value}`;
+        const name = document.getElementById('clientName').value.trim();
+        const project = document.getElementById('clientProject').value.trim();
+
+        if (name === "" || project === "") return;
+
+        const msg = `Hola Remodelaciones JM, soy ${name}. Me gustaría cotizar: ${project}`;
         window.open(`https://wa.me/573234265407?text=${encodeURIComponent(msg)}`, '_blank');
     });
 
-    // Slider
+    // Slider Logic
     const s = document.getElementById('slider');
     const imgs = ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg"];
     let currIdx = 0;
@@ -323,7 +314,7 @@
     }
     function manual(d) { clearInterval(auto); move(d); setTimeout(() => { auto = setInterval(() => move(1), 5000); }, 8000); }
 
-    // Lightbox
+    // Lightbox Logic
     function openLightbox(idx) {
         currIdx = idx;
         document.getElementById('lightboxImg').src = imgs[currIdx];
@@ -336,7 +327,7 @@
         document.getElementById('lightboxImg').src = imgs[currIdx]; 
     }
 
-    // Chat Funcional
+    // Chat Logic
     function toggleChat() {
         const m = document.getElementById('chatModal');
         m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';

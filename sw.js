@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jm-remodelaciones-v2'; // Cambia el v1 a v2 cuando hagas cambios grandes
+const CACHE_NAME = 'jm-remodelaciones-v3'; // Cambia el v1 a v2 cuando hagas cambios grandes
 const STATIC_ASSETS = [
   './',
   './index.html',
